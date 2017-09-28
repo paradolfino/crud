@@ -1,6 +1,9 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const app = express();
 const port = 3000;
+
+app.use(bodyParser.urlencoded({extended: true}))
 
 app.listen(port, function(){
 	console.log("I'm listening.. On PORT: " + port);
@@ -9,9 +12,9 @@ app.listen(port, function(){
 app.get('/',(req,res)=>{
 	var inp ='/index.html';
 	res.sendFile(__dirname + inp);
-	console.log("res.sendFile('" + __dirname + inp + "')");
+	console.log(`app.get:sendFile(${inp})`);
 })
 
 app.post("/quotes",(req,res)=>{
-	console.log("Posted");
+	console.log(`Posted ${JSON.stringify(req.body)}`);
 })
